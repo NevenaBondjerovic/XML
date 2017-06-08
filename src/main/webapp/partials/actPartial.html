@@ -1,0 +1,104 @@
+ <h3 class="centered">Dodavanje novog akta</h3>
+ </br></br>
+ 	<div class="col-sm-8">
+ 		<p>Unesite naziv akta</p>
+		<div class="form-inline">
+			<input required type = "text" class="form-control" ng-model = "aktNaziv" placeholder="Naziv akta"/>
+			<button ng-show="aktNaziv" type="button" class="btn btn-primary custom" ng-click="initialiseAct()">Zapocni akt</button>
+			<button ng-show="tree.length" type="button" class="btn btn-primary custom" ng-click="createAct()">Kreiraj akt</button>
+			<button ng-show="tree.length" type="button" class="btn btn-primary custom" ng-click="discardAct()">Odbaci akt</button>
+		</div>
+	</div>
+	<div class="col-sm-6" ></br></br>
+		<div  class = "relative1">
+			<script type="text/ng-template"  id="tree_item_renderer.html">
+			<button id="{{data.name}}" type="button" class="btn btn-primary" ng-click="clickedElement(data, $event)">{{data.name}}</button>
+			<span ng-show="data.type!='Alineja' && data.type!='Odeljak'">
+				<button type="button" class="btn btn-success btn-xs" ng-click="addSubelement(data)">Dodaj
+					{{data.childType}}</button>
+			</span>
+			<span ng-show="data.type=='Odeljak'">
+				<button ng-show="pododeljak" type="button" class="btn btn-success btn-xs" ng-click="addSubelement(data, 'Pododeljak')">Dodaj
+					pododeljak</button>
+				<button ng-show="clan" type="button" class="btn btn-success btn-xs" ng-click="addSubelement(data, 'Clan')">Dodaj
+					clan</button>
+			</span>
+			<span>
+				<button type="button" class="btn btn-warning btn-xs" ng-click="deleteElement(data, tree)">ObriÅ¡i
+					{{data.name}}</button>
+			</span>
+			<ul style="list-style-type:none">
+				<li ng-repeat="data in data.children" ng-include="'tree_item_renderer.html'"></li>
+			</ul>
+		</script>
+			<ul style="list-style-type:none">
+				<li ng-repeat="data in tree" ng-include="'tree_item_renderer.html'">       </li>
+			</ul>
+		</div>
+	</div>	
+	<div ng-show="(selected && selected.length !== 0)" class ="col-sm-5 col-sm-pull-1">
+		</br></br></br></br></br></br></br></br></br>
+		<div class="centered">
+			<label id="list"> SadrÅ¾aj: {{selected.name}}</label>
+			<input ng-show="imeIzmenljivo" required type = "text" class="form-control" ng-model = "selected.name""/>
+		</div>
+		<div ng-show="sadrzajIzmenjiv">
+			<textarea ckeditor ng-model="selectedContent" class="form-control"></textarea>
+		</div>
+		<div ng-show="sadrzajIzmenjiv">
+			<label>Referenciraj:</label>
+			<select ng-model="selectedRef.act" class="form-control" ng-change="changeAct()" required>
+				<option ng-repeat="act in allActNamesAccepted" >
+					{{act}}
+				</option>
+			</select></br>
+			<span ng-show = "members.length">
+				<label>ÄŒlan:</label>
+				<select ng-model="selectedRef.member" class="form-control" ng-change="changeMember()" required>
+					<option value="" selected="selected"></option>
+					<option ng-repeat="member in members" >
+						{{member}}
+					</option>	
+				</select></br>	
+			</span>
+			<span ng-show = "paragraphs.length">
+				<label>Stav:</label>
+				<select ng-show = "paragraphs.length" ng-model="selectedRef.paragraph" class="form-control" ng-change="changeParagraph()" required>
+					<option value="" selected="selected"></option>
+					<option ng-repeat="paragraph in paragraphs" >
+						{{paragraph}}
+					</option>
+				</select></br>
+			</span>
+			<span ng-show = "clauses.length">
+				<label>TaÄ�ka:</label>
+				<select ng-show = "clauses.length"  ng-model="selectedRef.clause" class="form-control" ng-change="changeClause()" required>
+					<option value="" selected="selected"></option>
+					<option ng-repeat="clause in clauses" >
+						{{clause}}
+					</option>
+				</select></br>	
+			</span>
+			<span ng-show = "subclauses.length">
+				<label>PodtaÄ�ka:</label>
+				<select ng-show = "subclauses.length"  ng-model="selectedRef.subclause" class="form-control" ng-change="changeSubclause()" required>
+					<option value="" selected="selected"></option>
+					<option ng-repeat="subclause in subclauses" >
+						{{subclause}}
+					</option>
+				</select></br>	
+			</span>
+			<span ng-show = "indents.length">
+				<label>Alineja:</label>
+				<select ng-show = "indents.length" ng-model="selectedRef.indent" class="form-control" ng-change="changeIndent()" required>
+					<option value="" selected="selected"></option>
+					<option ng-repeat="indent in indents" >
+						{{indent}}
+					</option>
+				</select></br>
+			</span>
+		</div>
+	</div></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+	<div class="col-sm-1 col-sm-pull-1" ng-show="(selected && selected.length !== 0 && sadrzajIzmenjiv)">
+		<button type="button" class="btn btn-primary" ng-click="addContent()">Ubaci sadrÅ¾aj</button>	
+	</div>

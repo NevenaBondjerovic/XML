@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+<meta charset="ISO-8859-1">
+
+	<script type="text/javascript" src="jquery/jquery-2.1.4.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+	<script src="https://code.angularjs.org/1.2.9/angular-sanitize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.3/ui-bootstrap-tpls.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="stilovi.css">
+	<script src="app.js"></script>
+	<script src="controllers/appController.js"></script>
+	<script src="controllers/loginController.js"></script>
+	<script src="controllers/searchController.js"></script>
+	<script src="controllers/registrationController.js"></script>
+	<script src="controllers/actController.js"></script>
+	<script src="controllers/amendmentController.js"></script>
+	<script src="controllers/withdrawalController.js"></script>
+	<script src="controllers/sessionController.js"></script>
+
+	<script src="services/userService.js"></script>
+	<script src="services/actService.js"></script>
+	<script src="services/amendmentService.js"></script>
+	<script src="services/sessionService.js"></script>
+
+	<script src="constants/amendmentConstants.js"></script>
+	<script src="//cdn.ckeditor.com/4.5.9/full/ckeditor.js"></script>
+
+
+<title>XML 2016</title>
+</head>
+<body class="bg" ng-controller="appController">
+	<span ng-if="user">
+		<a href="#/login" ng-click="logout()" class="btn btn-warning topRight"><span class="glyphicon glyphicon-log-out"></span> Odjava</a>
+		<a href="#/" class="btn btn-primary"> <span class="glyphicon glyphicon-search" ></span> Pretraga</a>
+		<a href="" class="btn btn-success" ng-click="redirectToNewAct()"><span class="glyphicon glyphicon-plus" ></span> Dodavanje novog akta</a>
+		<a href="" class="btn btn-success" ng-click="redirectToNewAmendment()"><span class="glyphicon glyphicon-plus" ></span> Dodavanje novog amandmana</a>
+		<a href="#/proposalWithdrawal" class="btn btn-warning"><span class="glyphicon glyphicon-trash" ></span> Povlačenje predloga</a>
+		<span ng-if="user.role === 'Predsednik'">
+			<a href="#/session" class="btn btn-info"><span class="glyphicon glyphicon-th-list" ></span> Vođenje sednice</a>
+		</span>
+	</span>
+	<span class="topRight">
+		<span ng-if="!user">
+			<a href="#/" class="btn btn-primary"> <span class="glyphicon glyphicon-search" ></span> Pretraga</a>
+			<a href="#/login" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> Prijava</a>
+			<a href="#/registration" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Registracija</a>
+		</span>
+	</span>
+	<div ng-view></div>
+</body>
+</html>

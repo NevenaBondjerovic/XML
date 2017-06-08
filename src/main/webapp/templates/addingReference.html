@@ -1,0 +1,51 @@
+<label>Referenciraj:</label>
+<select ng-model="$parent.$parent.selectedRef.act" class="form-control" ng-change="changeAct()" required>
+		<option ng-repeat="act in allActNamesAccepted" >
+			{{act}}
+		</option>
+	</select></br>
+	<span ng-if = "$parent.$parent.members.length">
+		<label>Član:</label>
+		<select ng-model="$parent.$parent.selectedRef.member" class="form-control" ng-change="changeMember()" required>
+			<option value="" selected="selected"></option>
+			<option ng-repeat="member in members" >
+				{{member}}
+			</option>	
+		</select></br>	
+	</span>
+	<span ng-if = "$parent.$parent.paragraphs.length">
+		<label>Stav:</label>
+		<select ng-if = "$parent.$parent.paragraphs.length" ng-model="$parent.$parent.selectedRef.paragraph" class="form-control" ng-change="changeParagraph()" required>
+			<option value="" selected="selected"></option>
+			<option ng-repeat="paragraph in paragraphs" >
+				{{paragraph}}
+			</option>
+		</select></br>
+	</span>
+	<span ng-if = "$parent.$parent.clauses.length">
+		<label>Tačka:</label>
+		<select ng-if = "clauses.length"  ng-model="$parent.$parent.selectedRef.clause" class="form-control" ng-change="changeClause()" required>
+			<option value="" selected="selected"></option>
+			<option ng-repeat="clause in clauses" >
+				{{clause}}
+			</option>
+		</select></br>	
+	</span>
+	<span ng-if = "$parent.$parent.subclauses.length">
+		<label>Podtačka:</label>
+		<select ng-if = "subclauses.length"  ng-model="$parent.$parent.selectedRef.subclause" class="form-control" ng-change="changeSubclause()" required>
+			<option value="" selected="selected"></option>
+			<option ng-repeat="subclause in subclauses" >
+				{{subclause}}
+			</option>
+		</select></br>	
+	</span>
+	<span ng-if = "$parent.$parent.indents.length">
+		<label>Alineja:</label>
+		<select ng-if = "indents.length" ng-model="$parent.$parent.selectedRef.indent" class="form-control" ng-change="changeIndent()" required>
+			<option value="" selected="selected"></option>
+			<option ng-repeat="indent in indents" >
+				{{indent}}
+			</option>
+		</select></br>
+	</span>

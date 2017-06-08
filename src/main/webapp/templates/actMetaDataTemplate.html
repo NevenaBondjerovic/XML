@@ -1,0 +1,28 @@
+<table class="table table-bordered tableBG">
+  <tbody>
+    <tr>
+      <th class="centered">Naziv akta</th>
+      <th class="centered" ng-if="isRefFilter">Status</th>
+      <th class="centered" ng-if="!isWithdrawal">Predlagač</th>
+      <th class="centered" ng-if="!isRefFilter">Operacije</th>
+      <th class="centered">Preuzimanje</th>
+    </tr>
+    <tr data-ng-repeat="(actIndex, act) in acts track by $index" class="centered">
+      <td><a href="" ng-click="actPreview(this.act)">{{act.name}}</a></td>
+      <td ng-if="isRefFilter">{{act.status}}</td>
+      <td ng-if="!isWithdrawal">{{act.userInfo}}</td>
+      <td ng-if="!isRefFilter">
+        <button ng-click="withdrawActProposal($event, actIndex)" id="{{act.name}}" class="btn btn-warning" ng-if="isWithdrawal">
+          <span class="glyphicon glyphicon-trash"></span> Povuci</button>
+        <button ng-click="concludeVotingInPrinciple(actIndex)"  class="btn btn-info" ng-if="isSession">
+          <span class="glyphicon glyphicon-ok"></span> Zaključi glasanje u načelu</button>
+      </td>
+      <td>
+        <button ng-click="downloadActPDF(this.act)" class="btn btn-primary">
+          <span class="glyphicon glyphicon-save"></span> PDF</button>
+        <button ng-click="downloadActXHTML(this.act)"  class="btn btn-primary">
+          <span class="glyphicon glyphicon-save"></span> XHTML</button>
+      </td>
+    </tr>
+  <tbody>
+<table>

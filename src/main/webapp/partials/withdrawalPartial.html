@@ -1,0 +1,17 @@
+<div>
+  <br/><br/>
+  <div class="col-sm-3"></div>
+  <div class="col-sm-6">
+    <div ng-if="!amendments.length && !acts.length">
+      <h3 class="centered">Nemate predloga akata i amandmana da povučete!</h4> <br/>
+    </div>
+    <div ng-if="acts.length">
+      <h3 class="centered">Predlozi akata:</h4> <br/>
+      <act-meta-data></act-meta-data>
+    </div>
+    <div ng-if="amendments.length">
+      <h3 class="centered">Predlozi amandmana:</h4> <br/>
+      <amendment-meta-data></amendment-meta-data>
+    </div>
+  </div>
+</div>

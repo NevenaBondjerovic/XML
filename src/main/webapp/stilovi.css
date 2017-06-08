@@ -1,0 +1,53 @@
+@CHARSET "ISO-8859-1";
+
+.centered{
+	text-align : center;
+	vertical-align:middle
+}
+
+.topRight{
+	float : right;
+	margin-right : 10px;
+	top : 5px;
+	position: relative;
+}
+
+.tableBG{
+	background-color: #333333;
+}
+
+.bg{
+	color: white;
+	background: url(images/xml_bg_img.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	color:white;
+}
+#list{
+	 font-size: 200%;
+}
+#label{
+	 font-size: 150%;
+}
+ul {
+    list-style: circle;
+}
+li {
+    margin-left: 10px;
+}
+.custom {
+    width: 95px !important;
+}
+.btn {
+    margin-right: 5px;!important; 
+}
+div.relative {
+    position: relative;
+    right: 15px;
+}
+div.relative1 {
+    position: relative;
+    right: 45px;
+}

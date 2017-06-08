@@ -1,0 +1,156 @@
+<div>
+	<div class="col-sm-4"></div>
+	<h2>Dodavanje amandmana</h2>
+	
+	<div ng-if="!create && !state">
+		<br/><br/>
+		<div class="col-sm-4">	
+			<label>Izbor akta:</label>
+			<select ng-model="$parent.selectedAct" class="form-control" ng-change="changeSelection()" required>
+			  <option>
+				   {{actsInProgress}}
+			  </option>
+			</select></br>
+		</div></br>		
+		<div class ="col-sm-1" ng-if="$parent.selectedAct">
+				<button type="button" class="btn btn-primary custom" ng-click="addState()">Dodavanje</button>
+		</div>
+		<div class ="col-sm-1" ng-if="selectedAct">
+				<button type="button" class="btn btn-primary custom" ng-click="editState()">Izmena</button>	
+		</div>
+		<div class ="col-sm-1" ng-if="selectedAct">
+				<button type="button" class="btn btn-primary custom" ng-click="deleteState()">Brisanje</button>	
+		</div>		
+	</div>
+
+	<div ng-if="!create && !amandman && state">
+		<div class="col-sm-6" ></br></br>
+			<label id="label">Stanje {{$parent.state}}</label>&nbsp;
+			<button type="button" class="btn btn-primary " ng-click="chooseState()">Nazad na izbor stanja</button></br></br>
+			<div class = "col-sm-4 relative" ng-if="!createClan && state">
+				<label>Izbor člana akta:</label>
+				<select ng-model="$parent.$parent.selectedClan" class="form-control" ng-change="getClanovi(this)" required>
+				  <option ng-repeat="clan in filteredMembers" >
+					   {{clan.name}}
+				  </option>
+				</select>					
+			</div>
+			<div ng-if="state && !createClan"></br>
+				<span ng-if="$parent.selectedClan.length > 0 && $parent.selectedClan && state!='delete'">
+					<button type="button" class="btn btn-success" ng-click="addProposition()">Kreiraj predlog</button>
+				</span>
+				<span ng-if="(proposalList.length > 0 && proposalList)">
+					<button type="button" class="btn btn-success" ng-click="createAmendment()">Kreiraj amandman</button>
+				</span>
+				<span ng-if="state == 'append' && !createClan">
+					<button type="button" class="btn btn-success" ng-click="addClan()">Dodaj novi član</button>		
+				</span>
+			</div>
+			<div ng-if="createClan && state == 'append' && !amandman">
+				<button type="button" class="btn btn-success" ng-click="addProposition()">Kreiraj predlog</button>
+				<span ng-if="($parent.proposalList.length > 0 && $parent.proposalList) && createClan">
+					<button type="button" class="btn btn-success" ng-click="createAmendment()">Kreiraj amandman</button>
+				</span>
+				<button type="button" class="btn btn-primary" ng-click="returnFromAddingClan()">Nazad na opšte dodavanje</button>					
+			</div>			
+			<div ng-if="($parent.selectedClan && $parent.selectedClan.length !== 0) && state && !createClan" id="list">
+				</br>				
+				<label>Struktura člana:</label>
+				</br>
+				<div  class = "relative1">
+					<script type="text/ng-template"  id="tree_item_renderer.html">
+						<button id="{{data.name}}" type="button" class="btn btn-primary" ng-click="clickedElement(data, $event)">{{data.name}}</button>
+						<span ng-if="state == 'append' && data.type!='indent'">
+							<button type="button" class="btn btn-success btn-xs" ng-click="addSubelement(data)">Dodaj
+								podelement</button>
+						</span>
+						<span ng-if="state == 'append' && !data.check">
+							<button type="button" class="btn btn-warning btn-xs" ng-click="remove(data)">Obriši
+								{{data.name}}</button>
+						</span>
+						<ul style="list-style-type:none">
+							<li ng-repeat="data in data.content" ng-include="'tree_item_renderer.html'"></li>
+						</ul>
+					</script>
+					<ul style="list-style-type:none">
+						<li ng-repeat="data in tree" ng-include="'tree_item_renderer.html'">       </li>
+					</ul>
+				</div>
+			</div>	
+			<div ng-if = "createClan && $parent.state == 'append'" id = "list">
+				</br>								
+				<label>Struktura člana:</label>				
+				</br><label>Ime člana:</label></br>
+				<input type="text" class="form-control"ng-model="member.name"></br>
+				<div  class = "relative1">
+					<script type="text/ng-template"  id="tree_item_renderer1.html">					
+						<span ng-if="data1.type === 'member'">								
+							<button ng-bind="member.name" id = "{{data1.id}}" type="button" class="btn btn-primary" ng-click="clickedElement(data1, $event)"></button>						
+						</span>
+						<span ng-if="data1.type !== 'member'">
+							<button id = "{{data1.id}}" type="button" class="btn btn-primary" ng-click="clickedElement(data1, $event)">{{data1.name}}</button>
+						</span>
+						<span ng-if="state == 'append' && data1.type !=='indent'">
+							<button type="button" class="btn btn-success btn-xs" ng-click="addSubelement(data1)">Dodaj podelement</button>						
+						</span>
+						<span ng-if="state == 'append' && data1.type !=='member'">
+							<button type="button" class="btn btn-warning btn-xs" ng-click="remove(data1)">Obriši {{data1.name}}</button>
+						</span>
+						<ul style="list-style-type:none">
+							<li ng-repeat="data1 in data1.content track by $index" ng-include="'tree_item_renderer1.html'"></li>
+						</ul>
+					</script>
+					<ul style="list-style-type:none">
+						<li ng-repeat="data1 in $parent.tree1" ng-include="'tree_item_renderer1.html'">       </li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div ng-if="(proposalList && proposalList.length !== 0) && state == 'delete'" && amandman class = "col-sm-6 col-sm-pull-1"></br></br></br></br></br></br></br></br></br>
+			<amendment-proposition-list></amendment-proposition-list>	
+		</div>
+		
+		<div ng-if="(selected && selected.length !== 0) && (state !== 'delete' || createClan)" class ="col-sm-4 col-sm-pull-1">
+			</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+			<amendment-data-template></amendment-data-template>	
+		</div></br></br></br></br></br></br></br></br></br></br></br>
+		<div ng-if="(selected && selected.length !== 0) && state !== 'delete'" class="col-sm-2 col-sm-pull-1" >
+			</br></br></br></br></br></br>
+			<adding-reference></adding-reference>
+			<div class="col-sm-1 col-sm-pull-1" ng-if="(selected && selected.length !== 0) && state == 'append'">
+				<button type="button" class="btn btn-primary" ng-click="addContent()">Ubaci sadržaj</button>	
+			</div>	
+		</div>
+	</div>
+	<div class = "col-sm-7" ng-if="(proposalList && proposalList.length !== 0) && amandman && state == 'update'" >
+		</br>
+		<div ng-if="(proposalList && proposalList.length !== 0)">
+			<amendment-proposition-list></amendment-proposition-list>
+		</div>		
+	</div>
+	<div class = "col-sm-10" ng-if="(proposalList && proposalList.length !== 0) && amandman && state == 'append'" >
+		</br></br>
+		<div class = "col-sm-6 relative">
+			<amendment-proposition-list></amendment-proposition-list>
+		</div>
+	</div>
+	<div class = "col-sm-10" ng-if="amandman && proposalList.length">
+		<div class = "col-sm-7">
+			<label>Obrazloženje:</label></br>
+			<textarea ckeditor name="ckeditor" ng-model="$parent.propositionText" class="form-control" style="resize:none" rows="4" cols="50"></textarea></br>		
+			<button type="button" class="btn btn-primary" ng-click="addAmendment()">Predloži amandman</button>
+			<button type="button" class="btn btn-primary" ng-click="quit()">Odustani</button>	
+		</div>
+		<div ng-if="amandman"class="col-sm-2 col-sm-push-1">
+			</br>
+			<adding-reference></adding-reference>
+		</div>
+	</div>
+	<div class = "col-sm-4" ng-if="amandman && !proposalList.length && state">
+		</br>
+		<label>Nema predloga u amandmanu</label>
+		<button type="button" class="btn btn-primary" ng-click="quit()">Idi nazad</button>
+	</div>
+</div>
+
+

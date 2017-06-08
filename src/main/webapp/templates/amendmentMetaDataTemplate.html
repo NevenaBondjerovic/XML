@@ -1,0 +1,28 @@
+<table class="table table-bordered tableBG">
+  <tbody>
+    <tr>
+      <th class="centered">Referenciran propis</th>
+      <th class="centered">Operacija</th>
+      <th class="centered" ng-if="isSession">Predlagač</th>
+      <th class="centered">Operacije</th>
+      <th class="centered">Preuzimanje</th>
+    </tr>
+    <tr data-ng-repeat="(amendmentIndex, amendment) in amendments track by $index" class="centered">
+      <td> <a href="" ng-click="amendmentPreview(this.amendment)">{{amendment.referredActName}}, član {{amendment.referredClauseNumber}}</a></td>
+      <td>{{amendment.operationType}}</td>
+      <td ng-if="isSession">{{amendment.userInfo}}</td>
+      <td>
+        <button ng-click="withdrawAmendmentProposal($event, amendmentIndex)" id="{{amendment.id}}" class="btn btn-warning" ng-if="isWithdrawal">
+          <span class="glyphicon glyphicon-trash"></span> Povuci </button>
+        <button ng-click="concludeAmendmentVoting(amendmentIndex)"  class="btn btn-info" ng-if="isSession">
+          <span class="glyphicon glyphicon-ok"></span> Zaključi glasanje</button>
+      </td>
+      <td>
+        <button ng-click="downloadAmendmentPDF(this.amendment)" class="btn btn-primary">
+          <span class="glyphicon glyphicon-save"></span> PDF</button>
+        <button ng-click="downloadAmendmentXHTML(this.amendment)"  class="btn btn-primary">
+          <span class="glyphicon glyphicon-save"></span> XHTML</button>
+      </td>
+    </tr>
+  <tbody>
+<table>

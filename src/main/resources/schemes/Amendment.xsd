@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.parlament.gov.rs/amandmani"
+    xmlns:am="http://www.parlament.gov.rs/amandmani" xmlns:pr="http://www.parlament.gov.rs/propisi"
+    xmlns:akt="http://www.parlament.gov.rs/akti">
+
+    <xs:import namespace="http://www.parlament.gov.rs/akti" schemaLocation="Act.xsd"/>
+    <xs:element name="Amandman">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="RefAkta" type="xs:string"/>
+                <xs:element name="Lista_predloga">
+                    <xs:complexType mixed="false">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="Predlog_amandmana">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element ref="akt:ref"/>
+                                        <xs:element minOccurs="0" name="sadrzaj">
+                                            <xs:complexType mixed="true">
+                                                <xs:sequence>
+                                                  <xs:element maxOccurs="unbounded" minOccurs="0"
+                                                  ref="akt:ref"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element maxOccurs="1" minOccurs="0" ref="am:Cvor"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Obrazlozenje">
+                    <xs:complexType mixed="true">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" ref="akt:ref"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="tip" type="xs:string" use="required"/>
+            <xs:attribute name="status" type="xs:string" use="required"/>
+            <xs:attribute name="id" type="xs:string" use="required"/>
+            <xs:attribute name="predlagac" type="xs:string" use="required"/>
+            <xs:attribute name="naziv" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Cvor">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="am:Cvor"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="akt:ref"/>
+            </xs:sequence>
+            <xs:attribute name="naziv" type="xs:string"/>
+            <xs:attribute name="tipCvora" type="xs:string"/>
+            <xs:attribute name="id" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

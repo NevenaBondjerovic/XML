@@ -1,0 +1,52 @@
+<div>
+  <h1 class="centered">Sednica</h1> <br/>
+  <h2 class="centered" ng-if="session.councilors && inPogress">Broj poslanika: {{session.councilors}}</h2>
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <div ng-if="!inPogress">
+      <div class="form-inline centered">
+        <h3>Broj poslanika:<h3>
+        <input type="number" ng-model="session.councilors" min="0" class="form-control"/>
+        <button ng-click="startSession()" class="btn btn-success">
+          <span class="glyphicon glyphicon-ok"></span> Počni sednicu </button>
+      </div>
+    </div>
+    <div class="centered" ng-if="inPogress">
+      <h3>Glasanje:</h3>
+      <table class="table ">
+        <thead>
+          <th class="centered">Za:</th>
+          <th class="centered">Uzdržani:</th>
+          <th class="centered">Protiv:</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="number" min="0" class="form-control col-sm-3" ng-model="session.votesFor"/></td>
+            <td><input type="number" min="0" class="form-control col-sm-3" ng-model="session.votesReserved"/></td>
+            <td><input type="number" min="0" class="form-control col-sm-3" ng-model="session.votesAgainst"/></td>
+          </tr>
+        </tbody>
+      </table>
+    </div> <br/><br/>
+    <div ng-if="inPogress">
+      <div ng-if="!consideringAmendments && !acceptingInWhole && acts.length && !waitingForAmendmentPropositions">
+        <h3 class="centered"> Akti: </h3>
+        <act-meta-data></act-meta-data>
+      </div>
+      <div ng-if="consideringAmendments">
+        <h3 class="centered"> Amandmani akta {{currentAct.name}}: </h3>
+        <amendment-meta-data></amendment-meta-data>
+      </div>
+      <div ng-if="acceptingInWhole" class="centered">
+        <h3 class="centered"> Prihvati akt {{currentAct.name}} u celosti? </h3>
+        <button ng-click="concludeVotingInWhole()"  class="btn btn-info" ng-if="isSession">
+          <span class="glyphicon glyphicon-ok"></span> Zaključi glasanje u celosti</button>
+      </div>
+      <div ng-if="waitingForAmendmentPropositions" class="centered">
+        <h3 class="centered"> Predlaganje amandmana je otvoreno, zatvoriti? </h3>
+        <button ng-click="acceptActInPrinciple(currentActIndex)" class="btn btn-success">
+          <span class="glyphicon glyphicon-hourglass"></span> Da </button>
+      </div>
+    </div>
+  </div>
+</div>

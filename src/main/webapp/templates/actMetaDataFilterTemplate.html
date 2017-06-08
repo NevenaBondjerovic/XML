@@ -1,0 +1,45 @@
+
+<div class="col-sm-12">
+  <label>Status akta:</label>
+  <select ng-model="metaData.status" class="form-control" required>
+      <option value="U_procesu">U porocesu</option>
+      <option value="Prihvacen">Prihvaćen</option>
+  </select>
+  <br/><br/>
+  <label>Naziv akta:</label>
+  <input type="text" ng-model="metaData.name" class="form-control">
+  <br/><br/>
+  <hr/>
+  <div ng-if="metaData.status === 'Prihvacen'">
+    <div class="col-sm-2"></div>
+    <div class="form-inline col-sm-8">
+      <label class="col-sm-6">Način prihvatanja:</label>
+      <select ng-model="metaData.acceptType" class="form-control col-sm-4" required>
+          <option value="U_nacelu">U načelu</option>
+          <option value="U_pojedinostima">U pojedinostima</option>
+          <option value="U_celosti">U celosti</option>
+      </select>
+    </div>
+    <br/><br/><br/><br/>
+    <div class="row" ng-if="metaData.acceptType">
+      <label class="col-sm-1">Od:</label>
+      <date-picker ng-model="metaData.dateFrom" class="col-sm-5"> </date-picker>
+      <div ng-if="metaData.dateFrom">
+        <label class="col-sm-1">Do:</label>
+        <date-picker ng-model="metaData.dateTo" class="col-sm-5"> </date-picker>
+      </div>
+    </div>
+    <hr/>
+    <label>Glasanje:</label>
+    <div class="form-inline">
+      <label class="col-sm-4">Za:</label>
+      <label class="col-sm-4">Uzdržani:</label>
+      <label class="col-sm-4">Protiv:</label>
+    </div>
+    <div class="form-inline">
+      <input type="number" min="0" value="0" class="form-control col-sm-3" ng-model="metaData.votesFor1"/>
+      <input type="number" min="0" value="0" class="form-control col-sm-3" ng-model="metaData.votesReserved1"/>
+      <input type="number" min="0" value="0" class="form-control col-sm-3" ng-model="metaData.votesAgainst1"/>
+    </div>
+  </div>
+</div>

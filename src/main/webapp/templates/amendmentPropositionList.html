@@ -1,0 +1,24 @@
+<table class="table table-bordered tableBG" border="1">
+	<tbody>
+		<tr ng-repeat = "(dataIndex, data) in $parent.proposalList track by $index">
+			<th ng-if="state == 'append'" class="centered">
+				Predlog za dodavanje: 
+			</th>
+			<th ng-if="state == 'update'" class="centered">
+				Predlog za izmenu: 
+			</th>
+			<td ng-if="state == 'delete'" class="centered">
+				Predlog za brisanje: 
+			</td>			
+			<td> 
+				<span ng-repeat = "x in data.ref">
+					{{x}}
+				</span>
+			</td>
+		   <td class="centered">
+				<button type="button" class="btn btn-warning" ng-click="removeProposition(data, dataIndex)">Odbaci predlog</button>
+		   </td>				
+		</tr>
+	</tbody>
+</table>
+

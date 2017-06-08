@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Amandman xmlns:ns2="http://www.parlament.gov.rs/akti" tip="Izmena" status="U_procesu" id="idi18" predlagac="email@gmail.com" naziv="Amendment1">
+    <RefAkta>act1</RefAkta>
+    <Lista_predloga>
+        <Predlog_amandmana>
+            <ns2:ref akt="act1" deo="p1" glava="h1" odeljak="s1" pododeljak="ss1" clan="m1" stav="par2" tacka="c2" podtacka="s1" alineja=""></ns2:ref>
+            <sadrzaj>sadrzaj podtacke 2</sadrzaj>
+            <Cvor naziv="Podtacka1" tipCvora="Podtacka" id="id56">
+                <Cvor naziv="Alineja1" tipCvora="Alineja" id="id1">neki text alineja 1</Cvor>
+                <Cvor naziv="Alineja2" tipCvora="Alineja" id="id2">neki text alineja 2</Cvor>neki text podtacka</Cvor>
+        </Predlog_amandmana>
+    </Lista_predloga>
+    <Obrazlozenje>description</Obrazlozenje>
+</Amandman>

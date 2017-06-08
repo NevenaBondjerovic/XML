@@ -1,0 +1,42 @@
+<div class="centered col-sm-12"><br/><br/>
+	<h3>Pretraga</h3>
+  <br/><br/>
+  <div class="col-sm-3"></div>
+  <div class="col-sm-6">
+    <label>Vrsta pretrage:</label>
+    <select ng-model="searchType" class="form-control" ng-change="onChange()" required>
+      <option value="meta-data">Po meta podacima</option>
+      <option value="content">Po sadržaju</option>
+      <option value="refs">Po referencama</option>
+    </select>
+		<br/>
+    <label ng-if="searchType == 'content'">Sadržaj akta:</label>
+    <input required type = "text" class="form-control" ng-model = "akt.keyword"
+          ng-if="searchType == 'content'"/>
+    <br/>
+		<act-meta-data-filter ng-if="searchType === 'meta-data'"></act-meta-data-filter>
+		<div ng-if="searchType == 'refs'">
+      <label>Referencirani akt:</label>
+      <select ng-model="ref.act"
+            ng-options="ref.name for ref in allActs"
+            class="form-control">
+			</select>
+    </div>
+    <br/><br/>
+		<span class="col-sm-5"></span>
+		<span class="col-sm-2">
+			<br/>
+	    <button ng-click="filter()" class="btn btn-primary" ng-if="searchType.length">
+				<span class="glyphicon glyphicon-search" ></span> Pretraga
+			</button>
+		</span><br/><br/>
+		<span class="col-sm-5"></span>
+		<br/>
+    <br/><br/>
+		<div ng-if="acts.length">
+			<h4 ng-if="ref.act.name">Akti koji referenciraju {{ref.act.name}} </h4>
+
+			<act-meta-data></act-meta-data>
+		</div>
+  </div>
+</div>

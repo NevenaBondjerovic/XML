@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Akt xmlns:ns2="http://www.parlament.gov.rs/akti" naziv="dethgf" status="Prihvacen" predlagac="admin@admin.com">
+    <Deo naziv="dethgf Deo1" id="1">
+        <Glava naziv="dethgf Deo1 Glava1" id="1">
+            <Odeljak naziv="dethgf Deo1 Glava1 Odeljak1" id="1">
+                <Pododeljak naziv="dethgf Deo1 Glava1 Odeljak1 Pododeljak1" id="1">
+                    <Clan naziv="Clan1" id="1">t6y <ref clan="clan1" stav="stav1" tacka="tacka1" podtacka="podtacka2" alineja="alineja1">ggggggggg</ref>
+                    </Clan>
+                </Pododeljak>
+            </Odeljak>
+        </Glava>
+    </Deo>
+    <Podaci_o_glasanju>
+        <Broj_glasova_za>5</Broj_glasova_za>
+        <Broj_glasova_uzdrzan>0</Broj_glasova_uzdrzan>
+        <Broj_glasova_protiv>0</Broj_glasova_protiv>
+    </Podaci_o_glasanju>
+    <Podaci_o_razresenju_statusa>
+        <Datum_prihvatanja_u_nacelu>2016-06-17+02:00</Datum_prihvatanja_u_nacelu>
+        <Datum_prihvatanja_u_pojedinostima>2016-06-17+02:00</Datum_prihvatanja_u_pojedinostima>
+        <Datum_prihvatanja_u_celosti>2016-06-17+02:00</Datum_prihvatanja_u_celosti>
+    </Podaci_o_razresenju_statusa>
+</Akt>
